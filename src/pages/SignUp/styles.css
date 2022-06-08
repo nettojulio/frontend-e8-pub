@@ -1,0 +1,116 @@
+.signUp-image {
+  width: 50%;
+  height: 100vh;
+}
+
+.container-signUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+}
+.signUp {
+  width: 450px;
+  height: 433px;
+}
+
+.signUp h1 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 2.8rem;
+  text-align: center;
+  color: #000000;
+  margin-bottom: 4rem;
+}
+.signUp form {
+  display: flex;
+  flex-direction: column;
+}
+.signUp input {
+  all: unset;
+  max-width: 475px;
+  height: 45px;
+  background-color: #fdfafa;
+  border: 1px solid #e8e8e8;
+  font-family: 'Roboto', sans-serif;
+  line-height: 19px;
+  color: #968b8b;
+  padding: 0 2rem;
+  margin-bottom: 1.6rem;
+  border-radius: 1rem;
+}
+.btn-signUp {
+  all: unset;
+  cursor: pointer;
+  width: 450px;
+  height: 45px;
+  border-radius: 8px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  line-height: 1.9rem;
+  text-align: center;
+  color: #ffffff;
+}
+.btn-signUp {
+  background-color: #ea1d2c;
+  margin-top: 5rem;
+}
+
+.to-signIn {
+  margin-top: 9.6rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  text-align: center;
+  display: flex;
+  gap: 0.5rem;
+}
+.to-signIn a {
+  text-decoration: none;
+}
+
+@media (max-width: 1200px) {
+  .signUp {
+    width: 380px;
+  }
+  .signUp input {
+    max-width: 380px;
+    height: 50px;
+    padding: 0 2rem;
+  }
+  .btn-cancel,
+  .btn-signUp {
+    width: 380px;
+    height: 50px;
+  }
+}
+@media (max-width: 900px) {
+  .signUp-image {
+    display: none;
+  }
+  .container-signUp {
+    width: 100vw;
+  }
+}
+@media (max-width: 480px) {
+  .signUp {
+    width: 320px;
+    height: 400px;
+  }
+  .signUp input {
+    max-width: 320px;
+    height: 50px;
+    padding: 0 2rem;
+  }
+  .signUp .btn-signUp,
+  .signUp .btn-cancel {
+    width: 320px;
+    height: 50px;
+  }
+  .signUp .btn-signUp {
+    margin-top: 5rem;
+  }
+}
