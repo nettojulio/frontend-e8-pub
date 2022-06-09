@@ -4,12 +4,18 @@ import plusIcon from '../../assets/plus.png';
 import useUsersContext from '../../hooks/useUsersContext';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import ModalConfirmDelete from '../ModalConfirmDelete';
+import ModalAddOrder from '../ModalAddOrder';
 import './styles.css';
 
 const Table = () => {
-  const { users, setCurrentUser } = useUsersContext();
-  const { setOpenModalAdd, openModalDelete, setOpenModalDelete } =
-    useGlobalContext();
+  const { users, setCurrentUser, currentUser } = useUsersContext();
+  const {
+    setOpenModalAdd,
+    openModalDelete,
+    setOpenModalDelete,
+    setOpenModalAddOrder,
+    openModalAddOrder,
+  } = useGlobalContext();
 
   const usersMock = [
     {
@@ -21,7 +27,7 @@ const Table = () => {
       data_nascimento: '12/12/12',
     },
     {
-      id: 1,
+      id: 11,
       nome: 'Quezia B',
       cpf: '147258369',
       telefone: '9999-9999',
@@ -29,7 +35,7 @@ const Table = () => {
       data_nascimento: '12/12/12',
     },
     {
-      id: 1,
+      id: 2,
       nome: 'Quezia B',
       cpf: '147258369',
       telefone: '9999-9999',
@@ -37,7 +43,7 @@ const Table = () => {
       data_nascimento: '12/12/12',
     },
     {
-      id: 1,
+      id: 3,
       nome: 'Quezia B',
       cpf: '147258369',
       telefone: '9999-9999',
@@ -45,7 +51,7 @@ const Table = () => {
       data_nascimento: '12/12/12',
     },
     {
-      id: 1,
+      id: 4,
       nome: 'Quezia B',
       cpf: '147258369',
       telefone: '9999-9999',
@@ -53,7 +59,7 @@ const Table = () => {
       data_nascimento: '12/12/12',
     },
     {
-      id: 1,
+      id: 5,
       nome: 'Quezia B',
       cpf: '147258369',
       telefone: '9999-9999',
@@ -61,7 +67,7 @@ const Table = () => {
       data_nascimento: '12/12/12',
     },
     {
-      id: 1,
+      id: 6,
       nome: 'Quezia B',
       cpf: '147258369',
       telefone: '9999-9999',
@@ -82,6 +88,8 @@ const Table = () => {
 
   const handleInsertOrder = (user) => {
     setCurrentUser(user);
+    setOpenModalAddOrder(true);
+    console.log(currentUser);
   };
 
   return (
@@ -122,6 +130,7 @@ const Table = () => {
           </div>
         ))}
         {openModalDelete && <ModalConfirmDelete />}
+        {openModalAddOrder && <ModalAddOrder />}
       </div>
     </div>
   );

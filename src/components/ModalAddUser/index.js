@@ -36,11 +36,11 @@ const ModalAddUser = () => {
   };
 
   const addUser = async (body) => {
-    return await requests.post('contatos', body, true);
+    return await requests.post('clientes', body, true);
   };
 
   const editUser = async (body) => {
-    return await requests.put('contatos', body, currentUser.id);
+    return await requests.put('clientes', body, currentUser.id);
   };
 
   const handleSubmit = async (event) => {

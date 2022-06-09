@@ -19,11 +19,10 @@ function Routes() {
       <Router>
         <Route path={['/', '/signIn']} exact component={SignIn} />
         <Route path={'/signUp'} exact component={SignUp} />
-        <ProtectedRoutes>
-          <UsersProvider>
-            <Route path={'/home'} exact component={Home}></Route>
-          </UsersProvider>
-        </ProtectedRoutes>
+
+        <UsersProvider>
+          <Route path={'/home'} exact component={Home}></Route>
+        </UsersProvider>
       </Router>
     </GlobalProvider>
   );
