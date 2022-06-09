@@ -1,5 +1,4 @@
 import logout from '../../assets/logout.svg';
-import ModalAddUser from '../../components/ModalAddUser';
 import Table from '../../components/Table';
 import useUsersContext from '../../hooks/useUsersContext';
 import useGlobalContext from '../../hooks/useGlobalContext';
@@ -7,7 +6,7 @@ import toast from '../../toast';
 import './styles.css';
 
 const Home = () => {
-  const { removeToken, openModalAdd, setOpenModalAdd } = useGlobalContext();
+  const { removeToken, setOpenModalAdd } = useGlobalContext();
   const { setCurrentUser } = useUsersContext();
 
   const handleLogout = () => {
@@ -31,7 +30,6 @@ const Home = () => {
         </button>
         <Table />
       </div>
-      {openModalAdd && <ModalAddUser />}
     </div>
   );
 };

@@ -5,76 +5,33 @@ import useUsersContext from '../../hooks/useUsersContext';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import ModalConfirmDelete from '../ModalConfirmDelete';
 import ModalAddOrder from '../ModalAddOrder';
+import ModalAddUser from '../ModalAddUser';
+import { usersMock } from '../../mocks';
+import useRequests from '../../hooks/useRequests';
 import './styles.css';
+import { useEffect } from 'react';
 
 const Table = () => {
-  const { users, setCurrentUser, currentUser } = useUsersContext();
+  const { users, setUsers, setCurrentUser, currentUser } = useUsersContext();
+  const request = useRequests();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await request.get('clientes');
+      setUsers(response);
+    };
+    //fetchData();
+    //eslint-disable-next-line
+  }, []);
+
   const {
     setOpenModalAdd,
     openModalDelete,
     setOpenModalDelete,
     setOpenModalAddOrder,
     openModalAddOrder,
+    openModalAdd,
   } = useGlobalContext();
-
-  const usersMock = [
-    {
-      id: 1,
-      nome: 'Quezia B',
-      cpf: '147258369',
-      telefone: '9999-9999',
-      email: 'quezia@email.com',
-      data_nascimento: '12/12/12',
-    },
-    {
-      id: 11,
-      nome: 'Quezia B',
-      cpf: '147258369',
-      telefone: '9999-9999',
-      email: 'quezia@email.com',
-      data_nascimento: '12/12/12',
-    },
-    {
-      id: 2,
-      nome: 'Quezia B',
-      cpf: '147258369',
-      telefone: '9999-9999',
-      email: 'quezia@email.com',
-      data_nascimento: '12/12/12',
-    },
-    {
-      id: 3,
-      nome: 'Quezia B',
-      cpf: '147258369',
-      telefone: '9999-9999',
-      email: 'quezia@email.com',
-      data_nascimento: '12/12/12',
-    },
-    {
-      id: 4,
-      nome: 'Quezia B',
-      cpf: '147258369',
-      telefone: '9999-9999',
-      email: 'quezia@email.com',
-      data_nascimento: '12/12/12',
-    },
-    {
-      id: 5,
-      nome: 'Quezia B',
-      cpf: '147258369',
-      telefone: '9999-9999',
-      email: 'quezia@email.com',
-      data_nascimento: '12/12/12',
-    },
-    {
-      id: 6,
-      nome: 'Quezia B',
-      cpf: '147258369',
-      telefone: '9999-9999',
-      email: 'quezia@email.com',
-      data_nascimento: '12/12/12',
-    },
-  ];
 
   const handleEditUser = (user) => {
     setCurrentUser(user);
@@ -129,6 +86,7 @@ const Table = () => {
             </div>
           </div>
         ))}
+        {openModalAdd && <ModalAddUser />}
         {openModalDelete && <ModalConfirmDelete />}
         {openModalAddOrder && <ModalAddOrder />}
       </div>
