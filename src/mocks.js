@@ -77,14 +77,14 @@ const ordersMock = [
     valorTotal: 2500,
     dataPedido: '12/12/12',
     descricao: 'alguma descrição aqui',
-    status: 'Pendente',
+    status: 'Concluído',
   },
   {
     usuarioId: 4,
     valorTotal: 2500,
     dataPedido: '12/12/12',
     descricao: 'alguma descrição aqui',
-    status: 'Pendente',
+    status: 'Concluído',
   },
   {
     usuarioId: 5,

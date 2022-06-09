@@ -27,18 +27,13 @@ header img {
   flex-direction: column;
   width: 100%;
 }
-.first-section {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-.orders-link {
+.users-link {
   color: #ea1d2c;
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   cursor: pointer;
   text-decoration: underline;
+  margin-bottom: 32px;
 }
 .container-users {
   align-self: center;

@@ -1,6 +1,7 @@
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import Home from './pages/Home';
+import Orders from './pages/Orders';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { GlobalProvider } from './context/GlobalContext';
 import useGlobalContext from './hooks/useGlobalContext';
@@ -19,10 +20,16 @@ function Routes() {
       <Router>
         <Route path={['/', '/signIn']} exact component={SignIn} />
         <Route path={'/signUp'} exact component={SignUp} />
-
+        {
+          //protectedRoutes
+        }
         <UsersProvider>
           <Route path={'/home'} exact component={Home}></Route>
+          <Route path={'/orders'} exact component={Orders}></Route>
         </UsersProvider>
+        {
+          //protectedRoutes
+        }
       </Router>
     </GlobalProvider>
   );

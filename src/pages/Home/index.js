@@ -1,5 +1,6 @@
 import logout from '../../assets/logout.svg';
-import Table from '../../components/Table';
+import Table from '../../components/TableUsers';
+import { Link } from 'react-router-dom';
 import useUsersContext from '../../hooks/useUsersContext';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import toast from '../../toast';
@@ -25,9 +26,14 @@ const Home = () => {
         <img onClick={handleLogout} src={logout} alt='log out' />
       </header>
       <div className='container-users'>
-        <button onClick={handleAddUser} className='btn-add-user'>
-          Adicionar usuário
-        </button>
+        <div className='first-section'>
+          <button onClick={handleAddUser} className='btn-add-user'>
+            Adicionar usuário
+          </button>
+          <Link to={'/orders'} className='orders-link'>
+            Consultar Pedidos {'>>'}{' '}
+          </Link>
+        </div>
         <Table />
       </div>
     </div>
