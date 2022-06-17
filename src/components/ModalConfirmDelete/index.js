@@ -10,7 +10,7 @@ const ModalConfirmDelete = () => {
   const requests = useRequests();
 
   const handleDelete = async () => {
-    const response = await requests.del('clientes', currentUser.id);
+    const response = await requests.del('clientes', currentUser.id, '8082');
 
     if (response) {
       loadUsersData();

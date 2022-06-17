@@ -20,16 +20,12 @@ function Routes() {
       <Router>
         <Route path={['/', '/signIn']} exact component={SignIn} />
         <Route path={'/signUp'} exact component={SignUp} />
-        {
-          //protectedRoutes
-        }
-        <UsersProvider>
-          <Route path={'/home'} exact component={Home}></Route>
-          <Route path={'/orders'} exact component={Orders}></Route>
-        </UsersProvider>
-        {
-          //protectedRoutes
-        }
+        <ProtectedRoutes>
+          <UsersProvider>
+            <Route path={'/home'} exact component={Home}></Route>
+            <Route path={'/orders'} exact component={Orders}></Route>
+          </UsersProvider>
+        </ProtectedRoutes>
       </Router>
     </GlobalProvider>
   );

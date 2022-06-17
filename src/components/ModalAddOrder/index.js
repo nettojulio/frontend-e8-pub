@@ -27,7 +27,7 @@ const ModalAddOrder = () => {
 
   const addOrder = async (body) => {
     console.log(form);
-    return await requests.post('pedidos', body, true);
+    return await requests.post('pedidos', body, true, '8081');
   };
 
   const handleSubmit = async (event) => {
@@ -43,7 +43,6 @@ const ModalAddOrder = () => {
     });
 
     if (response) {
-      ///TO-DO load orders data
       setOpenModalAddOrder(false);
     }
   };

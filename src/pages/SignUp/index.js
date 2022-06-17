@@ -19,7 +19,7 @@ const SignUp = () => {
     event.preventDefault();
     setLoading(true);
 
-    const result = await requests.post('usuarios', form);
+    const result = await requests.post('admin', form, false, '8080');
     setLoading(false);
 
     if (result) {

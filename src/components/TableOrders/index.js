@@ -1,20 +1,19 @@
 import useUsersContext from '../../hooks/useUsersContext';
-import { usersMock, ordersMock } from '../../mocks';
 import useRequests from '../../hooks/useRequests';
 import './styles.css';
 import { useEffect, useState } from 'react';
 
 const Table = () => {
   const { users } = useUsersContext();
-  const [oders, setOrders] = useState([]);
+  const [orders, setOrders] = useState([]);
   const request = useRequests();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await request.get('pedidos');
+      const response = await request.get('pedidos', '8081');
       setOrders(response);
     };
-    //fetchData();
+    fetchData();
     //eslint-disable-next-line
   }, []);
 
@@ -28,10 +27,10 @@ const Table = () => {
         <strong>Status</strong>
       </div>
       <div className='table-body'>
-        {ordersMock.map((item) => (
+        {orders.map((item) => (
           <div key={item.id} className='table-line'>
             <span>
-              {usersMock.filter((user) => user.id === item.usuarioId)[0].nome}
+              {users.filter((user) => user.id === item.usuarioId)[0].nome}
             </span>
             <span>{item.valorTotal}</span>
             <span>{item.dataPedido}</span>

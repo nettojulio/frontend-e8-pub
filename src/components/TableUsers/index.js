@@ -6,7 +6,6 @@ import useGlobalContext from '../../hooks/useGlobalContext';
 import ModalConfirmDelete from '../ModalConfirmDelete';
 import ModalAddOrder from '../ModalAddOrder';
 import ModalAddUser from '../ModalAddUser';
-import { usersMock } from '../../mocks';
 import useRequests from '../../hooks/useRequests';
 import './styles.css';
 import { useEffect } from 'react';
@@ -17,10 +16,10 @@ const Table = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await request.get('clientes');
+      const response = await request.get('clientes', '8082');
       setUsers(response);
     };
-    //fetchData();
+    fetchData();
     //eslint-disable-next-line
   }, []);
 
@@ -59,7 +58,7 @@ const Table = () => {
         <strong>Data de Nascimento</strong>
       </div>
       <div className='table-body'>
-        {usersMock.map((item) => (
+        {users.map((item) => (
           <div key={item.id} className='table-line'>
             <span>{item.nome}</span>
             <span>{item.cpf}</span>

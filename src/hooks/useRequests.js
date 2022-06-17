@@ -4,9 +4,9 @@ import useGlobalContext from './useGlobalContext';
 function useRequests() {
   const { token } = useGlobalContext();
 
-  async function get(route) {
+  async function get(route, port) {
     try {
-      const response = await fetch(`?/${route}`, {
+      const response = await fetch(`http://localhost:${port}/${route}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -24,9 +24,9 @@ function useRequests() {
     }
   }
 
-  async function getOne(route, id) {
+  async function getOne(route, id, port) {
     try {
-      const response = await fetch(`?/${route}/${id}`, {
+      const response = await fetch(`http://localhost:${port}/${route}/${id}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -45,14 +45,14 @@ function useRequests() {
     }
   }
 
-  async function post(route, body, withToken) {
+  async function post(route, body, withToken, port) {
     const config = withToken
       ? {
           Authorization: `Bearer ${token}`,
         }
       : {};
     try {
-      const response = await fetch(`?/${route}`, {
+      const response = await fetch(`http://localhost:${port}/${route}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,9 +73,9 @@ function useRequests() {
     }
   }
 
-  async function del(route, id) {
+  async function del(route, id, port) {
     try {
-      const response = await fetch(`?/${route}/${id}`, {
+      const response = await fetch(`http://localhost:${port}/${route}/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -94,9 +94,9 @@ function useRequests() {
     }
   }
 
-  async function put(route, body, id) {
+  async function put(route, body, id, port) {
     try {
-      const response = await fetch(`?/${route}/${id}`, {
+      const response = await fetch(`http://localhost:${port}/${route}/${id}`, {
         method: 'PUT',
         body: JSON.stringify(body),
         headers: {

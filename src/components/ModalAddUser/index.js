@@ -18,13 +18,13 @@ const ModalAddUser = () => {
       return;
     }
 
-    const { nome, email, telefone, cpf, data_nascimento } = currentUser;
+    const { nome, email, telefone, cpf, dataNascimento } = currentUser;
     setForm({
       name: nome,
       email,
       phone: telefone,
       cpf: cpf,
-      data_nascimento: data_nascimento,
+      dataNascimento: dataNascimento,
     });
 
     //eslint-disable-next-line
@@ -36,11 +36,11 @@ const ModalAddUser = () => {
   };
 
   const addUser = async (body) => {
-    return await requests.post('clientes', body, true);
+    return await requests.post('clientes', body, true, '8082');
   };
 
   const editUser = async (body) => {
-    return await requests.put('clientes', body, currentUser.id);
+    return await requests.put('clientes', body, currentUser.id, '8082');
   };
 
   const handleSubmit = async (event) => {
@@ -50,13 +50,7 @@ const ModalAddUser = () => {
       return;
     }
 
-    const body = {
-      nome: form.name,
-      email: form.email,
-      telefone: form.phone,
-    };
-
-    const response = currentUser ? await editUser(body) : await addUser(body);
+    const response = currentUser ? await editUser(form) : await addUser(form);
 
     if (response) {
       loadUsersData();

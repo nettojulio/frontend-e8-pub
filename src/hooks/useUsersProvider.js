@@ -10,13 +10,13 @@ const useUsersProvider = () => {
 
   useEffect(() => {
     if (token) {
-      //loadContactsData();
+      loadUsersData();
     }
     //eslint-disable-next-line
   }, []);
 
   const loadUsersData = async () => {
-    const response = await requests.get('clientes');
+    const response = await requests.get('clientes', '8082');
     setUsers(response);
   };
 
