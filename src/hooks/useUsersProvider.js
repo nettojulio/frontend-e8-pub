@@ -3,7 +3,7 @@ import useGlobalContext from './useGlobalContext';
 import useRequests from './useRequests';
 
 const useUsersProvider = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(false);
   const [currentUser, setCurrentUser] = useState(false);
   const { token } = useGlobalContext();
   const requests = useRequests();
@@ -16,8 +16,8 @@ const useUsersProvider = () => {
   }, []);
 
   const loadUsersData = async () => {
-    const response = await requests.get('clientes', '8082');
-    setUsers(response);
+    const response = await requests.get('usuarios', '8082');
+    setUsers(response.content);
   };
 
   return {

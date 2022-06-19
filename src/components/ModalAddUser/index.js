@@ -21,7 +21,7 @@ const ModalAddUser = () => {
     const { nome, email, telefone, cpf, dataNascimento } = currentUser;
     setForm({
       name: nome,
-      email,
+      email: email,
       phone: telefone,
       cpf: cpf,
       dataNascimento: dataNascimento,
@@ -32,7 +32,6 @@ const ModalAddUser = () => {
 
   const handleChange = (target) => {
     setForm({ ...form, [target.id]: target.value });
-    console.log(form);
   };
 
   const addUser = async (body) => {
@@ -85,7 +84,7 @@ const ModalAddUser = () => {
           />
           <input
             type='text'
-            id='phone'
+            id='email'
             placeholder='Email'
             value={form.email}
             onChange={(e) => handleChange(e.target)}

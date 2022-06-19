@@ -8,16 +8,20 @@ import ModalAddOrder from '../ModalAddOrder';
 import ModalAddUser from '../ModalAddUser';
 import useRequests from '../../hooks/useRequests';
 import './styles.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Table = () => {
-  const { users, setUsers, setCurrentUser, currentUser } = useUsersContext();
+  const { setCurrentUser, currentUser } = useUsersContext();
+  const [users, setUsers] = useState([]);
   const request = useRequests();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await request.get('clientes', '8082');
-      setUsers(response);
+      const response = await request.get('usuarios', '8082');
+      if (response) {
+        setUsers(response.content);
+
+      }
     };
     fetchData();
     //eslint-disable-next-line
@@ -64,7 +68,7 @@ const Table = () => {
             <span>{item.cpf}</span>
             <span>{item.telefone}</span>
             <span>{item.email}</span>
-            <span>{item.data_nascimento}</span>
+            <span>{item.dataNascimento}</span>
             <div className='action-icons'>
               <img
                 className='plus-icon'

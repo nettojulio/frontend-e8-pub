@@ -1,19 +1,32 @@
-import useUsersContext from '../../hooks/useUsersContext';
 import useRequests from '../../hooks/useRequests';
 import './styles.css';
 import { useEffect, useState } from 'react';
 
 const Table = () => {
-  const { users } = useUsersContext();
   const [orders, setOrders] = useState([]);
+  const [users, setUsers] = useState([]);
   const request = useRequests();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await request.get('pedidos', '8081');
-      setOrders(response);
+      const ordersResponse = await request.get('pedidos', '8081');
+      if (ordersResponse) {
+        console.log(ordersResponse.content);
+        setOrders(ordersResponse.content);
+      }
     };
     fetchData();
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    const fetchUsers = async() => {
+      const usersResponse = await request.get('usuarios', '8082');
+      if (usersResponse) {
+        setUsers(usersResponse.content);
+      }
+    }
+    fetchUsers();
     //eslint-disable-next-line
   }, []);
 

@@ -9,7 +9,8 @@ function useRequests() {
       const response = await fetch(`http://localhost:${port}/${route}`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          Authorization: token,
         },
       });
 

@@ -12,12 +12,12 @@ const ModalAddOrder = () => {
 
   const [form, setForm] = useState({
     usuarioId: currentUser.id,
-    usuarioName: currentUser.nome,
-    usuarioEmail: currentUser.email,
     valorTotal: '',
-    dataPedido: '',
+    dataPedido: new Date(),
     descricao: '',
-    status: 'Pendente',
+    status: "Pendente",
+    usuarioName: currentUser.nome,
+    usuarioEmail: currentUser.email
   });
 
   const handleChange = (target) => {
@@ -26,7 +26,6 @@ const ModalAddOrder = () => {
   };
 
   const addOrder = async (body) => {
-    console.log(form);
     return await requests.post('pedidos', body, true, '8081');
   };
 
@@ -41,7 +40,10 @@ const ModalAddOrder = () => {
       ...form,
       valorTotal: Number(form.valorTotal),
     });
-
+    console.log({
+      ...form,
+      valorTotal: Number(form.valorTotal),
+    })
     if (response) {
       setOpenModalAddOrder(false);
     }
