@@ -32,8 +32,8 @@ push-image:
   dependencies:
     - test
   script:
-    - docker build -t nettojulio/frontend-e8:cicdtest -f Dockerfile . # ATENCAO COM A TAG
-    - docker push nettojulio/frontend-e8:cicdtest # ATENCAO COM A TAG
+    - docker build -t nettojulio/frontend-e8:latest -f Dockerfile .
+    - docker push nettojulio/frontend-e8:latest
 
 deploy:
   stage: deploy
