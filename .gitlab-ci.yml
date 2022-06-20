@@ -32,8 +32,8 @@ push-image:
   dependencies:
     - test
   script:
-    - docker build -t nettojulio/frontend-e8:latest -f Dockerfile .
-    - docker push nettojulio/frontend-e8:latest
+    - docker build -t nettojulio/frontend-e8:stable -f Dockerfile .
+    - docker push nettojulio/frontend-e8:stable
 
 deploy:
   stage: deploy
