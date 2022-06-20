@@ -1,0 +1,42 @@
+image: node:lts-alpine
+
+stages:
+  - build
+  - test
+  - push-docker
+  - deploy
+
+build:
+  stage: build
+  script:
+    - echo "Clean the code..."
+    - npm ci
+    - echo "Compiling the code..."
+    - npm install
+    - echo "Building the code..."
+    - npm run build
+    - echo "Compile complete."
+
+test:
+  stage: test
+  script:
+    - echo "Test OK!"
+
+push-image:
+  image: docker
+  services:
+  - docker:dind
+  before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+  stage: push-docker
+  dependencies:
+    - test
+  script:
+    - docker build -t nettojulio/frontend-e8:cicdtest -f Dockerfile . # ATENCAO COM A TAG
+    - docker push nettojulio/frontend-e8:cicdtest # ATENCAO COM A TAG
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying application..."
+    - echo "Application successfully deployed."
