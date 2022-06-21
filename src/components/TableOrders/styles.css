@@ -12,6 +12,7 @@
 }
 
 .table-head strong {
+  text-align: center;
   width: 16rem;
   font-family: 'Roboto', sans-serif;
   font-size: 1.2rem;
@@ -30,6 +31,7 @@
   position: relative;
 }
 .table-line span {
+  text-align: center;
   width: 16rem;
   font-family: 'Roboto', sans-serif;
   font-size: 1.2rem;
