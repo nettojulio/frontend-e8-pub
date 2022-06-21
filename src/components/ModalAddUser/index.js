@@ -98,9 +98,9 @@ const ModalAddUser = () => {
           />
           <input
             type='text'
-            id='data_nascimento'
+            id='dataNascimento'
             placeholder='Data de nascimento'
-            value={form.data_nascimento}
+            value={form.dataNascimento}
             onChange={(e) => handleChange(e.target)}
           />
           <button onClick={handleSubmit} className='btn-add'>
