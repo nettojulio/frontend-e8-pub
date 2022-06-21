@@ -68,7 +68,7 @@ const Table = () => {
             <span>{item.cpf}</span>
             <span>{item.telefone}</span>
             <span>{item.email}</span>
-            <span>{item.dataNascimento}</span>
+            <span>{`${new Date(item.dataNascimento).getDate()}` + `/${new Date(item.dataNascimento).getMonth() + 1}` + `/${new Date(item.dataNascimento).getFullYear()}`}</span>
             <div className='action-icons'>
               <img
                 className='plus-icon'

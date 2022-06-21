@@ -46,7 +46,7 @@ const Table = () => {
               {users.filter((user) => user.id === item.usuarioId)[0].nome}
             </span>
             <span>{item.valorTotal}</span>
-            <span>{item.dataPedido}</span>
+            <span>{`${new Date(item.dataPedido).getDate()}` + `/${new Date(item.dataPedido).getMonth() + 1}` + `/${new Date(item.dataPedido).getFullYear()}`}</span>
             <span>{item.descricao}</span>
             <span
               className={
