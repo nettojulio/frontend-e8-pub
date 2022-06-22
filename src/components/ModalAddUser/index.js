@@ -3,10 +3,11 @@ import closeIcon from '../../assets/close.svg';
 import useUsersContext from '../../hooks/useUsersContext';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import useRequests from '../../hooks/useRequests';
+import { parse } from 'date-fns';
 import './styles.css';
 
 const ModalAddUser = () => {
-  const defaultValues = { name: '', email: '', phone: '' };
+  const defaultValues = { nome: '', email: '', telefone: '', dataNascimento: '', cpf: '' };
   const { setOpenModalAdd, openModalAdd } = useGlobalContext();
   const { loadUsersData, currentUser } = useUsersContext();
   const requests = useRequests();
@@ -20,11 +21,11 @@ const ModalAddUser = () => {
 
     const { nome, email, telefone, cpf, dataNascimento } = currentUser;
     setForm({
-      name: nome,
+      nome: nome,
       email: email,
-      phone: telefone,
+      telefone: telefone,
       cpf: cpf,
-      dataNascimento: dataNascimento,
+      dataNascimento: `${new Date(dataNascimento).getDate()}` + `-${new Date(dataNascimento).getMonth() + 1}` + `-${new Date(dataNascimento).getFullYear()}`
     });
 
     //eslint-disable-next-line
@@ -45,12 +46,11 @@ const ModalAddUser = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!form.name || !form.email || !form.phone) {
+    if (!form.nome || !form.email || !form.telefone) {
       return;
     }
-
-    const response = currentUser ? await editUser(form) : await addUser(form);
-
+    const formatDataForm = {...form, dataNascimento: parse(form.dataNascimento, 'dd/MM/yyyy', new Date())};
+    const response = currentUser ? await editUser(formatDataForm) : await addUser(formatDataForm);
     if (response) {
       loadUsersData();
       setOpenModalAdd(false);
@@ -70,9 +70,9 @@ const ModalAddUser = () => {
         <form action='submit'>
           <input
             type='text'
-            id='name'
+            id='nome'
             placeholder='Nome'
-            value={form.name}
+            value={form.nome}
             onChange={(e) => handleChange(e.target)}
           />
           <input
@@ -91,9 +91,9 @@ const ModalAddUser = () => {
           />
           <input
             type='text'
-            id='phone'
+            id='telefone'
             placeholder='Telefone'
-            value={form.phone}
+            value={form.telefone}
             onChange={(e) => handleChange(e.target)}
           />
           <input

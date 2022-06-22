@@ -7,6 +7,7 @@ import ModalConfirmDelete from '../ModalConfirmDelete';
 import ModalAddOrder from '../ModalAddOrder';
 import ModalAddUser from '../ModalAddUser';
 import useRequests from '../../hooks/useRequests';
+import {format} from 'date-fns';
 import './styles.css';
 import { useEffect, useState } from 'react';
 
@@ -68,7 +69,7 @@ const Table = () => {
             <span>{item.cpf}</span>
             <span>{item.telefone}</span>
             <span>{item.email}</span>
-            <span>{`${new Date(item.dataNascimento).getDate()}` + `/${new Date(item.dataNascimento).getMonth() + 1}` + `/${new Date(item.dataNascimento).getFullYear()}`}</span>
+            <span>{format(new Date(item.dataNascimento), 'dd/MM/yyyy')}</span>
             <div className='action-icons'>
               <img
                 className='plus-icon'

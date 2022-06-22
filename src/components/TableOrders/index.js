@@ -1,5 +1,6 @@
 import useRequests from '../../hooks/useRequests';
 import './styles.css';
+import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 
 const Table = () => {
@@ -11,7 +12,6 @@ const Table = () => {
     const fetchData = async () => {
       const ordersResponse = await request.get('pedidos', '8081');
       if (ordersResponse) {
-        console.log(ordersResponse.content);
         setOrders(ordersResponse.content);
       }
     };
@@ -46,7 +46,7 @@ const Table = () => {
               {users.filter((user) => user.id === item.usuarioId)[0].nome}
             </span>
             <span>{item.valorTotal}</span>
-            <span>{`${new Date(item.dataPedido).getDate()}` + `/${new Date(item.dataPedido).getMonth() + 1}` + `/${new Date(item.dataPedido).getFullYear()}`}</span>
+            <span>{format(new Date(item.dataPedido), 'dd/MM/yyyy')}</span>
             <span>{item.descricao}</span>
             <span
               className={

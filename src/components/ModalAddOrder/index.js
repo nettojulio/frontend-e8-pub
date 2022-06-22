@@ -3,6 +3,7 @@ import closeIcon from '../../assets/close.svg';
 import useUsersContext from '../../hooks/useUsersContext';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import useRequests from '../../hooks/useRequests';
+import { parse } from 'date-fns';
 import './styles.css';
 
 const ModalAddOrder = () => {
@@ -13,7 +14,7 @@ const ModalAddOrder = () => {
   const [form, setForm] = useState({
     usuarioId: currentUser.id,
     valorTotal: '',
-    dataPedido: new Date(),
+    dataPedido: '',
     descricao: '',
     status: "Pendente",
     usuarioName: currentUser.nome,
@@ -22,7 +23,6 @@ const ModalAddOrder = () => {
 
   const handleChange = (target) => {
     setForm({ ...form, [target.id]: target.value });
-    console.log(form);
   };
 
   const addOrder = async (body) => {
@@ -39,11 +39,8 @@ const ModalAddOrder = () => {
     const response = await addOrder({
       ...form,
       valorTotal: Number(form.valorTotal),
+      dataPedido: parse(form.dataPedido, 'dd/MM/yyyy', new Date())
     });
-    console.log({
-      ...form,
-      valorTotal: Number(form.valorTotal),
-    })
     if (response) {
       setOpenModalAddOrder(false);
     }
