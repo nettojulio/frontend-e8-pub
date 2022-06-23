@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
 }
+.table-body {
+  height: 56rem;
+}
 .table-head {
   display: flex;
   align-items: center;
@@ -10,7 +13,6 @@
   text-align: left;
   padding: 0 24px;
 }
-
 .table-head strong {
   text-align: center;
   width: 16rem;
@@ -29,6 +31,13 @@
   margin-bottom: 0.8rem;
   padding: 0 2.4rem;
   position: relative;
+}
+.pagination-buttons {
+  align-self: center; 
+}
+.pagination-buttons button img {
+  width: 30px;
+  height: 30px;
 }
 .table-line span {
   text-align: center;

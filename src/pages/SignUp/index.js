@@ -20,6 +20,7 @@ const SignUp = () => {
     setLoading(true);
 
     const result = await requests.post('admin', form, false, '8080');
+    console.log(form);
     setLoading(false);
 
     if (result) {

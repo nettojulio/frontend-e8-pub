@@ -4,9 +4,9 @@ import useGlobalContext from './useGlobalContext';
 function useRequests() {
   const { token } = useGlobalContext();
 
-  async function get(route, port) {
+  async function get(route, port, size, page) {
     try {
-      const response = await fetch(`http://localhost:${port}/${route}`, {
+      const response = await fetch(`http://localhost:${port}/${route}?size=${size}&page=${page}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

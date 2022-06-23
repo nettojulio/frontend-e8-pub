@@ -3,13 +3,14 @@ import closeIcon from '../../assets/close.svg';
 import useUsersContext from '../../hooks/useUsersContext';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import useRequests from '../../hooks/useRequests';
-import { parse } from 'date-fns';
+import { format, parse } from 'date-fns';
 import './styles.css';
+import toast from '../../toast';
 
 const ModalAddUser = () => {
   const defaultValues = { nome: '', email: '', telefone: '', dataNascimento: '', cpf: '' };
   const { setOpenModalAdd, openModalAdd } = useGlobalContext();
-  const { loadUsersData, currentUser } = useUsersContext();
+  const { currentUser } = useUsersContext();
   const requests = useRequests();
   const [form, setForm] = useState(defaultValues);
 
@@ -25,7 +26,7 @@ const ModalAddUser = () => {
       email: email,
       telefone: telefone,
       cpf: cpf,
-      dataNascimento: `${new Date(dataNascimento).getDate()}` + `-${new Date(dataNascimento).getMonth() + 1}` + `-${new Date(dataNascimento).getFullYear()}`
+      dataNascimento: format(new Date(dataNascimento), 'dd/MM/yyyy')
     });
 
     //eslint-disable-next-line
@@ -52,7 +53,7 @@ const ModalAddUser = () => {
     const formatDataForm = {...form, dataNascimento: parse(form.dataNascimento, 'dd/MM/yyyy', new Date())};
     const response = currentUser ? await editUser(formatDataForm) : await addUser(formatDataForm);
     if (response) {
-      loadUsersData();
+      toast.messageSuccess('Sucesso!');
       setOpenModalAdd(false);
     }
   };

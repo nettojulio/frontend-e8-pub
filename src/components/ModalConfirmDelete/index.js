@@ -3,6 +3,7 @@ import useUsersContext from '../../hooks/useUsersContext';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import useRequests from '../../hooks/useRequests';
 import './styles.css';
+import toast from '../../toast';
 
 const ModalConfirmDelete = () => {
   const { setOpenModalDelete } = useGlobalContext();
@@ -13,8 +14,8 @@ const ModalConfirmDelete = () => {
     const response = await requests.del('usuarios', currentUser.id, '8082');
 
     if (response) {
-      loadUsersData();
       setOpenModalDelete(false);
+      toast.messageSuccess('Sucesso!')
     }
   };
 
