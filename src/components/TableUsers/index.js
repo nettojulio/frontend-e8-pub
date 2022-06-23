@@ -62,7 +62,7 @@ const Table = () => {
         <strong>Data de Nascimento</strong>
       </div>
       <div className='table-body'>
-        {users.map((item) => (
+        {users && users.map((item) => (
           <div key={item.id} className='table-line'>
             <span>{item.nome}</span>
             <span>{item.cpf}</span>

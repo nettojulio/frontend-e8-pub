@@ -41,7 +41,7 @@ const Table = () => {
         <strong>Status</strong>
       </div>
       <div className='table-body'>
-        {orders.map((item) => (
+        {orders && orders.map((item) => (
           <div key={item.id} className='table-line'>
             <span>
               {users.filter((user) => user.id === item.usuarioId)[0].nome}
