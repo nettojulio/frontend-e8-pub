@@ -17,7 +17,7 @@ const Table = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await request.get(process.env.REACT_APP_USERS_API_URL,'usuarios', '8082');
+      const response = await request.get(`${process.env.REACT_APP_USERS_API_URL}`,'usuarios', '8082');
       if (response) {
         setUsers(response.content);
 
