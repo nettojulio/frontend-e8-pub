@@ -9,7 +9,7 @@ const Table = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const ordersResponse = await request.get('pedidos', '8081');
+      const ordersResponse = await request.get(process.env.REACT_APP_ORDERS_API_URL,'pedidos', '8081');
       if (ordersResponse) {
         console.log(ordersResponse.content);
         setOrders(ordersResponse.content);
@@ -21,7 +21,7 @@ const Table = () => {
 
   useEffect(() => {
     const fetchUsers = async() => {
-      const usersResponse = await request.get('usuarios', '8082');
+      const usersResponse = await request.get(process.env.REACT_APP_USERS_API_URL,'usuarios', '8082');
       if (usersResponse) {
         setUsers(usersResponse.content);
       }

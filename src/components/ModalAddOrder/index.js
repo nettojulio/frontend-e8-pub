@@ -26,7 +26,7 @@ const ModalAddOrder = () => {
   };
 
   const addOrder = async (body) => {
-    return await requests.post('pedidos', body, true, '8081');
+    return await requests.post(process.env.REACT_APP_ORDERS_API_URL ,'pedidos', body, true, '8081');
   };
 
   const handleSubmit = async (event) => {

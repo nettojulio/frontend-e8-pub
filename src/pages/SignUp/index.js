@@ -19,7 +19,7 @@ const SignUp = () => {
     event.preventDefault();
     setLoading(true);
 
-    const result = await requests.post('admin', form, false, '8080');
+    const result = await requests.post(process.env.REACT_APP_ADMIN_API_URL,'admin', form, false, '8080');
     setLoading(false);
 
     if (result) {

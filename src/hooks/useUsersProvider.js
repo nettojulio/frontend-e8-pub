@@ -16,7 +16,7 @@ const useUsersProvider = () => {
   }, []);
 
   const loadUsersData = async () => {
-    const response = await requests.get('usuarios', '8082');
+    const response = await requests.get(process.env.REACT_APP_USERS_API_URL,'usuarios', '8082');
     setUsers(response.content);
   };
 

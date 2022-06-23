@@ -35,11 +35,11 @@ const ModalAddUser = () => {
   };
 
   const addUser = async (body) => {
-    return await requests.post('usuarios', body, true, '8082');
+    return await requests.post(process.env.REACT_APP_USERS_API_URL,'usuarios', body, true, '8082');
   };
 
   const editUser = async (body) => {
-    return await requests.put('usuarios', body, currentUser.id, '8082');
+    return await requests.put(process.env.REACT_APP_USERS_API_URL,'usuarios', body, currentUser.id, '8082');
   };
 
   const handleSubmit = async (event) => {
