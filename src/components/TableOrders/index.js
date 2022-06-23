@@ -1,6 +1,7 @@
 import useRequests from '../../hooks/useRequests';
 import './styles.css';
 import { useEffect, useState } from 'react';
+import { formatToMoney } from "../../utils/utils";
 
 const Table = () => {
   const [orders, setOrders] = useState([]);
@@ -45,7 +46,7 @@ const Table = () => {
             <span>
               {users.filter((user) => user.id === item.usuarioId)[0].nome}
             </span>
-            <span>{item.valorTotal}</span>
+            <span>{formatToMoney(item.valorTotal)}</span>
             <span>{new Date(item.dataPedido).toLocaleDateString()}</span>
             <span>{item.descricao}</span>
             <span
