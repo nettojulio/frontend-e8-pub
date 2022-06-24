@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import useRequests from '../../hooks/useRequests';
+import toast from '../../toast';
 import './styles.css';
 
 const SignUp = () => {
@@ -18,12 +19,15 @@ const SignUp = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-
-    const result = await requests.post('admin', form, false, '8080');
+    
+    const result = await requests.post(`${process.env.REACT_APP_ADMIN_API_URL}`,'admin', form, false, '8080');
     setLoading(false);
-
+    console.log(result);
     if (result) {
       history.push('/signIn');
+      toast.messageSuccess('Cadastrado com sucesso!')
+    } else {
+      toast.messageError('Não foi possível cadastrar')
     }
   };
 

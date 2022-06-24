@@ -3,12 +3,14 @@ import closeIcon from '../../assets/close.svg';
 import useUsersContext from '../../hooks/useUsersContext';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import useRequests from '../../hooks/useRequests';
+import { format, parse } from 'date-fns';
 import './styles.css';
+import toast from '../../toast';
 
 const ModalAddUser = () => {
-  const defaultValues = { name: '', email: '', phone: '' };
+  const defaultValues = { nome: '', email: '', telefone: '', dataNascimento: '', cpf: '' };
   const { setOpenModalAdd, openModalAdd } = useGlobalContext();
-  const { loadUsersData, currentUser } = useUsersContext();
+  const { currentUser } = useUsersContext();
   const requests = useRequests();
   const [form, setForm] = useState(defaultValues);
 
@@ -20,11 +22,11 @@ const ModalAddUser = () => {
 
     const { nome, email, telefone, cpf, dataNascimento } = currentUser;
     setForm({
-      name: nome,
+      nome: nome,
       email: email,
-      phone: telefone,
+      telefone: telefone,
       cpf: cpf,
-      dataNascimento: dataNascimento,
+      dataNascimento: format(new Date(dataNascimento), 'dd/MM/yyyy')
     });
 
     //eslint-disable-next-line
@@ -35,24 +37,23 @@ const ModalAddUser = () => {
   };
 
   const addUser = async (body) => {
-    return await requests.post('usuarios', body, true, '8082');
+    return await requests.post(`${process.env.REACT_APP_USERS_API_URL}`,'usuarios', body, true, '8082');
   };
 
   const editUser = async (body) => {
-    return await requests.put('usuarios', body, currentUser.id, '8082');
+    return await requests.put(`${process.env.REACT_APP_USERS_API_URL}`,'usuarios', body, currentUser.id, '8082');
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!form.name || !form.email || !form.phone) {
+    if (!form.nome || !form.email || !form.telefone) {
       return;
     }
-
-    const response = currentUser ? await editUser(form) : await addUser(form);
-
+    const formatDataForm = {...form, dataNascimento: parse(form.dataNascimento, 'dd/MM/yyyy', new Date())};
+    const response = currentUser ? await editUser(formatDataForm) : await addUser(formatDataForm);
     if (response) {
-      loadUsersData();
+      toast.messageSuccess('Sucesso!');
       setOpenModalAdd(false);
     }
   };
@@ -70,9 +71,9 @@ const ModalAddUser = () => {
         <form action='submit'>
           <input
             type='text'
-            id='name'
+            id='nome'
             placeholder='Nome'
-            value={form.name}
+            value={form.nome}
             onChange={(e) => handleChange(e.target)}
           />
           <input
@@ -91,16 +92,16 @@ const ModalAddUser = () => {
           />
           <input
             type='text'
-            id='phone'
+            id='telefone'
             placeholder='Telefone'
-            value={form.phone}
+            value={form.telefone}
             onChange={(e) => handleChange(e.target)}
           />
           <input
             type='text'
-            id='data_nascimento'
+            id='dataNascimento'
             placeholder='Data de nascimento'
-            value={form.data_nascimento}
+            value={form.dataNascimento}
             onChange={(e) => handleChange(e.target)}
           />
           <button onClick={handleSubmit} className='btn-add'>

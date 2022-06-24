@@ -1,12 +1,11 @@
-import toast from '../toast/index';
 import useGlobalContext from './useGlobalContext';
 
 function useRequests() {
   const { token } = useGlobalContext();
 
-  async function get(route, port) {
+  async function get(url, route, port, size, page) {
     try {
-      const response = await fetch(`http://localhost:${port}/${route}`, {
+      const response = await fetch(`${url}:${port}/${route}?size=${size}&page=${page}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -21,13 +20,13 @@ function useRequests() {
       }
       return data;
     } catch (error) {
-      toast.messageError(error.message);
+      
     }
   }
 
-  async function getOne(route, id, port) {
+  async function getOne(url, route, id, port) {
     try {
-      const response = await fetch(`http://localhost:${port}/${route}/${id}`, {
+      const response = await fetch(`${url}:${port}/${route}/${id}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -42,18 +41,18 @@ function useRequests() {
 
       return data;
     } catch (error) {
-      toast.messageError(error.message);
+     
     }
   }
 
-  async function post(route, body, withToken, port) {
+  async function post(url, route, body, withToken, port) {
     const config = withToken
       ? {
           Authorization: `Bearer ${token}`,
         }
       : {};
     try {
-      const response = await fetch(`http://localhost:${port}/${route}`, {
+      const response = await fetch(`${url}:${port}/${route}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -70,13 +69,13 @@ function useRequests() {
 
       return data;
     } catch (error) {
-      toast.messageError(error.message);
+      
     }
   }
 
-  async function del(route, id, port) {
+  async function del(url, route, id, port) {
     try {
-      const response = await fetch(`http://localhost:${port}/${route}/${id}`, {
+      const response = await fetch(`${url}:${port}/${route}/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -91,13 +90,13 @@ function useRequests() {
 
       return data;
     } catch (error) {
-      toast.messageError(error.message);
+      
     }
   }
 
-  async function put(route, body, id, port) {
+  async function put(url, route, body, id, port) {
     try {
-      const response = await fetch(`http://localhost:${port}/${route}/${id}`, {
+      const response = await fetch(`${url}:${port}/${route}/${id}`, {
         method: 'PUT',
         body: JSON.stringify(body),
         headers: {
@@ -114,7 +113,7 @@ function useRequests() {
 
       return data;
     } catch (error) {
-      toast.messageError(error.message);
+    
     }
   }
 

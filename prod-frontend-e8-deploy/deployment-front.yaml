@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-deployment
+  namespace: grupo-08-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-e8
+  template:
+    metadata:
+      labels:
+        app: frontend-e8
+    spec:
+      containers:
+        - name: frontend-e8
+          image: nettojulio/frontend-e8:stable
+          env:
+            - name: REACT_APP_ADMIN_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: config-map-api-frontend-e8
+                  key: REACT_APP_ADMIN_API_URL
+            - name: REACT_APP_ORDERS_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: config-map-api-frontend-e8
+                  key: REACT_APP_ORDERS_API_URL
+            - name: REACT_APP_USERS_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: config-map-api-frontend-e8
+                  key: REACT_APP_USERS_API_URL
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "0.25"
+            limits:
+              memory: "512Mi"
+              cpu: "0.5"

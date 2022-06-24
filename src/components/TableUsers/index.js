@@ -9,24 +9,16 @@ import ModalAddUser from '../ModalAddUser';
 import useRequests from '../../hooks/useRequests';
 import './styles.css';
 import { useEffect, useState } from 'react';
+import iconNext from '../../assets/icon-next.png';
+import iconPrev from '../../assets/icon-prev.png';
+
 
 const Table = () => {
-  const { setCurrentUser, currentUser } = useUsersContext();
+  const { setCurrentUser } = useUsersContext();
+  const [pagination, setPagination] = useState({ totalPages: '', usersPerPage: 10, currentPage: 1, totalUsers: '', isLast: false, isFirst: true })
   const [users, setUsers] = useState([]);
   const request = useRequests();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await request.get('usuarios', '8082');
-      if (response) {
-        setUsers(response.content);
-
-      }
-    };
-    fetchData();
-    //eslint-disable-next-line
-  }, []);
-
+  
   const {
     setOpenModalAdd,
     openModalDelete,
@@ -35,6 +27,34 @@ const Table = () => {
     openModalAddOrder,
     openModalAdd,
   } = useGlobalContext();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await request.get(`${process.env.REACT_APP_USERS_API_URL}`,'usuarios', '8082', pagination.usersPerPage, pagination.currentPage);
+      if (response) {
+        setUsers(response.content);
+
+      }
+    };
+    fetchData();
+    //eslint-disable-next-line
+  }, [openModalAdd, openModalDelete]);
+
+  const prevPage = () => {
+    if (pagination.isFirst) {
+      return;
+    }
+    setPagination({...pagination, currentPage: pagination.currentPage - 1});
+    
+  }
+
+  const nextPage = () => {
+    if (pagination.isLast) {
+      return;
+    }
+    setPagination({...pagination, currentPage: pagination.currentPage + 1});
+  }
+
 
   const handleEditUser = (user) => {
     setCurrentUser(user);
@@ -49,7 +69,7 @@ const Table = () => {
   const handleInsertOrder = (user) => {
     setCurrentUser(user);
     setOpenModalAddOrder(true);
-    console.log(currentUser);
+   
   };
 
   return (
@@ -62,17 +82,18 @@ const Table = () => {
         <strong>Data de Nascimento</strong>
       </div>
       <div className='table-body'>
-        {users.map((item) => (
+        {users && users.map((item) => (
           <div key={item.id} className='table-line'>
             <span>{item.nome}</span>
             <span>{item.cpf}</span>
             <span>{item.telefone}</span>
             <span>{item.email}</span>
-            <span>{item.dataNascimento}</span>
+            <span>{new Date(item.dataNascimento).toLocaleDateString()}</span>
             <div className='action-icons'>
               <img
                 className='plus-icon'
                 onClick={() => handleInsertOrder(item)}
+
                 src={plusIcon}
                 alt='cadastrar pedido'
               />
@@ -92,6 +113,10 @@ const Table = () => {
         {openModalAdd && <ModalAddUser />}
         {openModalDelete && <ModalConfirmDelete />}
         {openModalAddOrder && <ModalAddOrder />}
+      </div>
+            <div className='pagination-buttons'>
+      <button onClick={prevPage}><img src={iconPrev} alt='próxima página' /></button>
+      <button onClick={nextPage}><img src={iconNext} alt='página anterior' /></button>
       </div>
     </div>
   );

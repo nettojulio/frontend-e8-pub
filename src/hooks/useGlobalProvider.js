@@ -7,7 +7,7 @@ const useGlobalProvider = () => {
   const [openModalAdd, setOpenModalAdd] = useState(false);
   const [openModalDelete, setOpenModalDelete] = useState(false);
   const [openModalAddOrder, setOpenModalAddOrder] = useState(false);
-
+  
   return {
     token,
     setToken,
