@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: config-map-api-frontend-e8
 data:
-  REACT_APP_ADMIN_API_URL: "http://a275997cc126c4e9bac006ea9dd7d852-556006740.us-east-1.elb.amazonaws.com"
-  REACT_APP_ORDERS_API_URL: "http://a724aeb9c757d4c6485c45fe06587833-1905366516.us-east-1.elb.amazonaws.com"
-  REACT_APP_USERS_API_URL: "http://a7252cd0327e840bdb0bbda188883ce4-737015108.us-east-1.elb.amazonaws.com"
+  REACT_APP_ADMIN_API_URL: "http://ac137165f81984e28b67441ff3c88ee5-693782289.us-east-1.elb.amazonaws.com"
+  REACT_APP_ORDERS_API_URL: "http://adb8f469aec5f4d6f8eacca5265a2aa2-2004004609.us-east-1.elb.amazonaws.com"
+  REACT_APP_USERS_API_URL: "http://ad2150fc4b85245bcb7b0e891afcbf53-1711421809.us-east-1.elb.amazonaws.com"
