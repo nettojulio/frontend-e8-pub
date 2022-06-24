@@ -2,7 +2,7 @@
 
 ## Front End
 
-Uma aplicação React para realização de pedidos.
+Uma aplicação React para realização de pedidos, cujo administrador deve se cadastrar.
 
 Repositório da API de administradores: https://gitlab.com/e8-ilab/desafio-modulo-02/api-administrador-e8
 
