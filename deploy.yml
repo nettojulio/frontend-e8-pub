@@ -1,0 +1,21 @@
+- hosts: all
+  tasks:
+    - name: "Upload Files"
+      copy:
+        src: "frontend-e8-deploy"
+        dest: "/home/ubuntu/grupo08/"
+        
+    - name: "Apply configmap-frontend.yaml"
+      shell: kubectl apply -f /home/ubuntu/grupo08/frontend-e8-deploy/configmap-frontend.yaml -n grupo-08-dev
+
+    - name: "Apply loadbalancer-frontend.yaml"
+      shell: kubectl apply -f /home/ubuntu/grupo08/frontend-e8-deploy/loadbalancer-frontend.yaml -n grupo-08-dev
+
+    - name: "Apply clusterip-frontend.yaml"
+      shell: kubectl apply -f /home/ubuntu/grupo08/frontend-e8-deploy/clusterip-frontend.yaml -n grupo-08-dev
+
+    - name: "Apply deployment-frontend.yaml"
+      shell: kubectl apply -f /home/ubuntu/grupo08/frontend-e8-deploy/deployment-frontend.yaml -n grupo-08-dev
+
+    - name: "Apply hpa-frontend.yaml"
+      shell: kubectl apply -f /home/ubuntu/grupo08/frontend-e8-deploy/hpa-frontend.yaml -n grupo-08-dev
