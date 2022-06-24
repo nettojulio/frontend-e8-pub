@@ -5,6 +5,7 @@ import useGlobalContext from '../../hooks/useGlobalContext';
 import useRequests from '../../hooks/useRequests';
 import { parse } from 'date-fns';
 import './styles.css';
+import toast from '../../toast';
 
 const ModalAddOrder = () => {
   const { setOpenModalAddOrder } = useGlobalContext();
@@ -26,7 +27,7 @@ const ModalAddOrder = () => {
   };
 
   const addOrder = async (body) => {
-    return await requests.post('pedidos', body, true, '8081');
+    return await requests.post(`${process.env.REACT_APP_ORDERS_API_URL}` ,'pedidos', body, true, '8081');
   };
 
   const handleSubmit = async (event) => {
@@ -43,6 +44,7 @@ const ModalAddOrder = () => {
     });
     if (response) {
       setOpenModalAddOrder(false);
+      toast.messageSuccess('Sucesso!');
     }
   };
 

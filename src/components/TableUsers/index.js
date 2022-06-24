@@ -7,7 +7,6 @@ import ModalConfirmDelete from '../ModalConfirmDelete';
 import ModalAddOrder from '../ModalAddOrder';
 import ModalAddUser from '../ModalAddUser';
 import useRequests from '../../hooks/useRequests';
-import {format} from 'date-fns';
 import './styles.css';
 import { useEffect, useState } from 'react';
 import iconNext from '../../assets/icon-next.png';
@@ -15,7 +14,7 @@ import iconPrev from '../../assets/icon-prev.png';
 
 
 const Table = () => {
-  const { setCurrentUser, currentUser } = useUsersContext();
+  const { setCurrentUser } = useUsersContext();
   const [pagination, setPagination] = useState({ totalPages: '', usersPerPage: 10, currentPage: 1, totalUsers: '', isLast: false, isFirst: true })
   const [users, setUsers] = useState([]);
   const request = useRequests();
@@ -31,7 +30,7 @@ const Table = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await request.get('usuarios', '8082', pagination.usersPerPage, pagination.currentPage);
+      const response = await request.get(`${process.env.REACT_APP_USERS_API_URL}`,'usuarios', '8082', pagination.usersPerPage, pagination.currentPage);
       if (response) {
         setUsers(response.content);
 
@@ -83,17 +82,18 @@ const Table = () => {
         <strong>Data de Nascimento</strong>
       </div>
       <div className='table-body'>
-        {users.map((item) => (
+        {users && users.map((item) => (
           <div key={item.id} className='table-line'>
             <span>{item.nome}</span>
             <span>{item.cpf}</span>
             <span>{item.telefone}</span>
             <span>{item.email}</span>
-            <span>{format(new Date(item.dataNascimento), 'dd/MM/yyyy')}</span>
+            <span>{new Date(item.dataNascimento).toLocaleDateString()}</span>
             <div className='action-icons'>
               <img
                 className='plus-icon'
                 onClick={() => handleInsertOrder(item)}
+
                 src={plusIcon}
                 alt='cadastrar pedido'
               />

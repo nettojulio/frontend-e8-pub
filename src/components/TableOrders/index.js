@@ -1,9 +1,9 @@
 import useRequests from '../../hooks/useRequests';
 import './styles.css';
-import { format} from 'date-fns';
 import { useEffect, useState } from 'react';
 import iconNext from '../../assets/icon-next.png';
 import iconPrev from '../../assets/icon-prev.png';
+import { formatToMoney } from "../../utils/utils";
 
 const Table = () => {
   const [orders, setOrders] = useState([]);
@@ -11,8 +11,8 @@ const Table = () => {
   const [pagination, setPagination] = useState({ totalPages: '', ordersPerPage: 10, currentPage: 1, totalOrders: '', isLast: false, isFirst: true })
 
   useEffect(() => {
-  const fetchData = async () => {
-      const ordersResponse = await request.get('pedidos', '8081', pagination.ordersPerPage, pagination.currentPage);
+    const fetchData = async () => {
+      const ordersResponse = await request.get(`${process.env.REACT_APP_ORDERS_API_URL}`,'pedidos', '8081', pagination.ordersPerPage, pagination.currentPage);
       if (ordersResponse) {
         setOrders(ordersResponse.content);
         setPagination({...pagination, totalPages: ordersResponse.totalPages, totalOrders: ordersResponse.totalElements, isLast: ordersResponse.last, isFirst: ordersResponse.first })
@@ -50,13 +50,13 @@ const Table = () => {
         <strong>Status</strong>
       </div>
       <div className='table-body'>
-        {orders.map((item) => (
+        {orders && orders.map((item) => (
           <div key={item.id} className='table-line'>
             <span>
               {item.usuarioId}
             </span>
-            <span>{item.valorTotal}</span>
-            <span>{format(new Date(item.dataPedido), 'dd/MM/yyyy')}</span>
+            <span>{formatToMoney(item.valorTotal)}</span>
+            <span>{new Date(item.dataPedido).toLocaleDateString()}</span>
             <span>{item.descricao}</span>
             <span
               className={

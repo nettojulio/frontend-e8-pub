@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import useRequests from '../../hooks/useRequests';
+import toast from '../../toast';
 import './styles.css';
 
 const SignIn = () => {
@@ -25,12 +26,14 @@ const SignIn = () => {
     event.preventDefault();
     setLoading(true);
 
-    const response = await requests.post('login', form, false, '8080');
+    const response = await requests.post(`${process.env.REACT_APP_ADMIN_API_URL}`,'login', form, false, '8080');
     setLoading(false);
 
     if (response) {
       setToken(response.token);
       history.push('/Home');
+    } else {
+      toast.messageError('Usuário ou senha incorretos');
     }
   };
   return (
